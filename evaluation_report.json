@@ -1,0 +1,90 @@
+{
+  "summary": {
+    "accuracy": 0.5385,
+    "macroF1": 0.5137,
+    "weightedF1": 0.5137,
+    "evaluatedSessions": 52
+  },
+  "perSignal": {
+    "revenge_trading": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 5
+    },
+    "overtrading": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 5
+    },
+    "fomo_entries": {
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "support": 5
+    },
+    "premature_exit": {
+      "precision": 1.0,
+      "recall": 0.6,
+      "f1": 0.75,
+      "support": 5
+    },
+    "time_of_day_bias": {
+      "precision": 0.4167,
+      "recall": 0.8333,
+      "f1": 0.5556,
+      "support": 6
+    },
+    "plan_non_adherence": {
+      "precision": 0.2667,
+      "recall": 0.8,
+      "f1": 0.4,
+      "support": 5
+    },
+    "loss_running": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 5
+    },
+    "session_tilt": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 5
+    },
+    "position_sizing_inconsistency": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 5
+    }
+  },
+  "diagnostics": {
+    "confusionMatrix": [
+      { "actual": "loss_running", "predicted": "plan_non_adherence", "count": 5 },
+      { "actual": "session_tilt", "predicted": "time_of_day_bias", "count": 5 },
+      { "actual": "position_sizing_inconsistency", "predicted": "plan_non_adherence", "count": 3 },
+      { "actual": "none", "predicted": "loss_running", "count": 3 },
+      { "actual": "premature_exit", "predicted": "plan_non_adherence", "count": 2 }
+    ],
+    "topMistakes": [
+      "Loss Running sessions are frequently misclassified as Plan Non-Adherence due to overlap in risk-management violations.",
+      "Session Tilt signals are being absorbed by Time of Day Bias in late-session loss clusters.",
+      "Position Sizing Inconsistency is largely undetected due to the strict priority given to behavioral impulse signals."
+    ],
+    "weakSignals": [
+      "session_tilt",
+      "loss_running",
+      "position_sizing_inconsistency",
+      "plan_non_adherence"
+    ]
+  },
+  "systemInfo": {
+    "approach": "deterministic rule-based + priority pipeline",
+    "singleLabelPrediction": true,
+    "confidenceAware": true,
+    "calibration": "Platinum Performance Architect v1.0.0"
+  }
+}
