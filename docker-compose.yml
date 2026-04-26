@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nevup-coach:latest
+    container_name: nevup-coach-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - nevup-data:/srv/app/data
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: "sqlite:///./data/nevup.db"
+      DATASET_PATH: "/srv/app/nevup_seed_dataset.json"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  # Optional: Ollama for local LLM (comment out if using OpenAI/Groq)
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: nevup-ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama-data:/root/.ollama
+  #   restart: unless-stopped
+
+volumes:
+  nevup-data:
+  # ollama-data:
