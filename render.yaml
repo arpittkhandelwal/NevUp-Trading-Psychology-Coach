@@ -9,10 +9,6 @@ services:
       - key: OPENAI_API_KEY
         sync: false # You will set this in the Render Dashboard
       - key: DATABASE_URL
-        value: sqlite:////data/nevup.db
+        value: sqlite:///./nevup.db
       - key: APP_NAME
         value: "🧠 NevUp Trading Psychology Coach"
-    disk:
-      name: nevup-data
-      mountPath: /data
-      sizeGB: 1
